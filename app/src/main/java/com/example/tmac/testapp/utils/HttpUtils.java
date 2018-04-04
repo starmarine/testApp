@@ -1,5 +1,9 @@
 package com.example.tmac.testapp.utils;
 
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
 import com.example.tmac.testapp.exception.ApplicationException;
 
 import java.io.IOException;
@@ -18,12 +22,24 @@ public class HttpUtils {
     public static final MediaType JSON  = MediaType.parse("application/json; charset=utf-8");
     public static OkHttpClient client = new OkHttpClient();
 
-    public static String get(String url){
+    public static String get(String url, Handler handler){
         try{
             Request request = new Request.Builder()
                     .url(url)
                     .build();
             Response response = client.newCall(request).execute();
+            if(response.isSuccessful()){
+                if(response.code() == 200){
+                    if(handler != null){
+                        Message msg = Message.obtain();
+                        Bundle b=new Bundle();//信息封包
+                        b.putString("type","noLogin");
+                        msg.setData(b);
+                        handler.sendMessage(msg);
+                    }
+                }
+            }
+
             return response.body().string();
         } catch (IOException e) {
             throw new ApplicationException(e.getMessage(),e);

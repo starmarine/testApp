@@ -23,4 +23,12 @@ public class HttpUtilsTest {
         System.out.print(dto);
     }
 
+    @Test
+    public void testException() throws Exception {
+        String body = HttpUtils.get("http://localhost:8080/test/exception");
+        System.out.println(body);
+        TestJsonDto dto = JSON.parseObject(body, TestJsonDto.class);
+        System.out.print(dto);
+    }
+
 }
