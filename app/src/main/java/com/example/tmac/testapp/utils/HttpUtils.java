@@ -5,8 +5,10 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.example.tmac.testapp.exception.ApplicationException;
+import com.example.tmac.testapp.utils.http.HttpResponse;
 
 import java.io.IOException;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -46,15 +48,26 @@ public class HttpUtils {
         }
     }
 
-    public String post(String url, String json){
+    public static String post(String url, String json){
+        HttpResponse response = doPost(url, json,null);
+        return response.getBody();
+    }
+
+    public static HttpResponse doPost(String url, String json, Map<String,String> headers){
         try{
             RequestBody body = RequestBody.create(JSON, json);
-            Request request = new Request.Builder()
+            Request.Builder builder = new Request.Builder()
                     .url(url)
-                    .post(body)
-                    .build();
+                    .post(body);
+            if(headers != null){
+                for(Map.Entry<String,String> header : headers.entrySet()){
+                    builder.header(header.getKey(),header.getValue());
+                }
+            }
+            Request request = builder.build();
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            String responseBody = response.body().string();
+            return new HttpResponse(response.code(),responseBody);
         }catch(IOException ex){
             throw new ApplicationException(ex.getMessage(),ex);
         }

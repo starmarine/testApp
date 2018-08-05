@@ -1,5 +1,7 @@
 package com.example.tmac.testapp.utils;
 
+import com.example.tmac.testapp.exception.ApplicationException;
+
 import org.apache.commons.codec.binary.Base64;
 
 import java.security.GeneralSecurityException;
@@ -96,9 +98,14 @@ public class KeyUtils {
         return cipher.doFinal(data);
     }
 
-    public static byte[] decryptByPrivateKey(String data, String base64PrivateKey) throws GeneralSecurityException {
-        PrivateKey key = decodePrivateKey(base64PrivateKey);
-        return decryptByKey(Base64.decodeBase64(data), key);
+    public static String decryptByPrivateKey(String data, String base64PrivateKey){
+        try{
+            PrivateKey key = decodePrivateKey(base64PrivateKey);
+            byte[] bytes =  decryptByKey(Base64.decodeBase64(data), key);
+            return new String(bytes);
+        }catch(Exception ex){
+            throw new ApplicationException(ex.getMessage(),ex);
+        }
     }
 
     public static String signByPrivateKey(byte[] data, String base64PrivateKey) throws GeneralSecurityException {

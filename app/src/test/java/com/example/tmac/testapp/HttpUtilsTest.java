@@ -17,7 +17,7 @@ public class HttpUtilsTest {
 
     @Test
     public void test() throws Exception {
-        String body = HttpUtils.get("http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=test&bk_length=10");
+        String body = HttpUtils.get("http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=test&bk_length=10",null);
         System.out.println(body);
         TestJsonDto dto = JSON.parseObject(body, TestJsonDto.class);
         System.out.print(dto);
@@ -25,7 +25,7 @@ public class HttpUtilsTest {
 
     @Test
     public void testException() throws Exception {
-        String body = HttpUtils.get("http://localhost:8080/test/exception");
+        String body = HttpUtils.get("http://localhost:8080/test/exception",null);
         System.out.println(body);
         TestJsonDto dto = JSON.parseObject(body, TestJsonDto.class);
         System.out.print(dto);

@@ -1,16 +1,10 @@
 package com.example.tmac.testapp;
 
 
-import android.util.Log;
-
 import com.example.tmac.testapp.utils.KeyUtils;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -36,7 +30,7 @@ public class KeyUtilsTest {
         String encrypted = KeyUtils.encryptByPublicKey(data.getBytes("UTF-8"),keyPair.publicKey);
         System.out.println(encrypted);
 
-        String decrypted = new String(KeyUtils.decryptByPrivateKey(encrypted,keyPair.privateKey),"UTF-8");
+        String decrypted = KeyUtils.decryptByPrivateKey(encrypted,keyPair.privateKey);
         System.out.println(decrypted);
 
         Assert.assertEquals(data,decrypted);
