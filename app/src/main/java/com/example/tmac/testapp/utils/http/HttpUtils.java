@@ -1,4 +1,4 @@
-package com.example.tmac.testapp.utils;
+package com.example.tmac.testapp.utils.http;
 
 import android.os.Bundle;
 import android.os.Handler;

@@ -1,7 +1,7 @@
 package com.example.tmac.testapp;
 
 
-import com.example.tmac.testapp.utils.AesKeyUtils;
+import com.example.tmac.testapp.utils.codec.AesKeyUtils;
 import com.example.tmac.testapp.utils.codec.Ciphertext;
 
 import org.apache.commons.codec.binary.Base64;

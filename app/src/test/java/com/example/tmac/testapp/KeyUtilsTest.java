@@ -1,7 +1,7 @@
 package com.example.tmac.testapp;
 
 
-import com.example.tmac.testapp.utils.KeyUtils;
+import com.example.tmac.testapp.utils.codec.KeyUtils;
 
 import org.junit.Assert;
 import org.junit.Test;

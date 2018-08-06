@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.tmac.testapp.activity.AbstractBaseActivity;
 import com.example.tmac.testapp.test.TestJsonDto;
-import com.example.tmac.testapp.utils.HttpUtils;
+import com.example.tmac.testapp.utils.http.HttpUtils;
 
 public class MainActivity extends AbstractBaseActivity {
     private TextView textView1;

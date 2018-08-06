@@ -1,4 +1,4 @@
-package com.example.tmac.testapp.utils;
+package com.example.tmac.testapp.utils.codec;
 
 import com.example.tmac.testapp.exception.ApplicationException;
 

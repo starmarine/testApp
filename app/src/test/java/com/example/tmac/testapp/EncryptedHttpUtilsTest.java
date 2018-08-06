@@ -1,7 +1,7 @@
 package com.example.tmac.testapp;
 
 import com.example.tmac.testapp.constants.Constants;
-import com.example.tmac.testapp.utils.EncryptedHttpUtils;
+import com.example.tmac.testapp.utils.http.EncryptedHttpUtils;
 import com.example.tmac.testapp.utils.http.HandlerWrapper;
 import com.example.tmac.testapp.utils.token.FakeTokenStore;
 

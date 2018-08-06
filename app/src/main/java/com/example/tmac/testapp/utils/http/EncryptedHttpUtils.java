@@ -1,9 +1,9 @@
-package com.example.tmac.testapp.utils;
+package com.example.tmac.testapp.utils.http;
 
 import com.example.tmac.testapp.constants.Constants;
 import com.example.tmac.testapp.exception.ApplicationException;
-import com.example.tmac.testapp.utils.http.HandlerWrapper;
-import com.example.tmac.testapp.utils.http.HttpResponse;
+import com.example.tmac.testapp.utils.codec.AesKeyUtils;
+import com.example.tmac.testapp.utils.codec.KeyUtils;
 import com.example.tmac.testapp.utils.token.ITokenStore;
 
 import org.apache.commons.codec.binary.Base64;

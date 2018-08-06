@@ -1,8 +1,7 @@
-package com.example.tmac.testapp.utils;
+package com.example.tmac.testapp.utils.codec;
 
 import com.example.tmac.testapp.exception.ApplicationException;
 import com.example.tmac.testapp.exception.DecryptionException;
-import com.example.tmac.testapp.utils.codec.Ciphertext;
 
 import org.apache.commons.codec.binary.Base64;
 
