@@ -1,16 +1,16 @@
 package com.example.tmac.testapp.utils.codec;
 
-import com.example.tmac.testapp.exception.ApplicationException;
+import android.util.Base64;
 
-import org.apache.commons.codec.binary.Base64;
+import com.example.tmac.testapp.exception.ApplicationException;
 
 import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.security.KeyFactory;
-import java.security.KeyPairGenerator;
-import java.security.PublicKey;
-import java.security.PrivateKey;
 import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
@@ -46,8 +46,8 @@ public class KeyUtils {
             PrivateKey privateKey = genKeyPair.getPrivate();
 //            String base64PublicKey = Base64.encodeToString(publicKey.getEncoded(),Base64.NO_WRAP);
 //            String base64PrivateKey = Base64.encodeToString(privateKey.getEncoded(),Base64.NO_WRAP);
-            String base64PublicKey = Base64.encodeBase64String(publicKey.getEncoded());
-            String base64PrivateKey = Base64.encodeBase64String(privateKey.getEncoded());
+            String base64PublicKey = Base64.encodeToString(publicKey.getEncoded(), Base64.DEFAULT);
+            String base64PrivateKey = Base64.encodeToString(privateKey.getEncoded(), Base64.DEFAULT);
             Base64KeyPair result = new Base64KeyPair(base64PublicKey, base64PrivateKey);
             return result;
         } catch (Exception ex) {
@@ -62,7 +62,7 @@ public class KeyUtils {
     }
 
     public static PrivateKey decodePrivateKey(String base64String) throws GeneralSecurityException {
-        byte[] keyBytes = Base64.decodeBase64(base64String);
+        byte[] keyBytes = Base64.decode(base64String,Base64.DEFAULT);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(ENCRYPTION_TYPE);
         PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
@@ -75,7 +75,7 @@ public class KeyUtils {
     }
 
     public static PublicKey decodePublicKey(String base64String) throws GeneralSecurityException {
-        byte[] keyBytes = Base64.decodeBase64(base64String);
+        byte[] keyBytes = Base64.decode(base64String,Base64.DEFAULT);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance(ENCRYPTION_TYPE);
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
@@ -86,7 +86,7 @@ public class KeyUtils {
         try {
             PublicKey key = decodePublicKey(base64PublicKey);
             byte[] encrypt = encryptByKey(data, key);
-            return Base64.encodeBase64String(encrypt);
+            return Base64.encodeToString(encrypt, Base64.DEFAULT);
         } catch (GeneralSecurityException ex) {
             throw new RuntimeException(ex.getMessage(), ex);
         }
@@ -101,7 +101,7 @@ public class KeyUtils {
     public static String decryptByPrivateKey(String data, String base64PrivateKey){
         try{
             PrivateKey key = decodePrivateKey(base64PrivateKey);
-            byte[] bytes =  decryptByKey(Base64.decodeBase64(data), key);
+            byte[] bytes =  decryptByKey(Base64.decode(data,Base64.DEFAULT), key);
             return new String(bytes);
         }catch(Exception ex){
             throw new ApplicationException(ex.getMessage(),ex);
@@ -111,7 +111,7 @@ public class KeyUtils {
     public static String signByPrivateKey(byte[] data, String base64PrivateKey) throws GeneralSecurityException {
         PrivateKey key = decodePrivateKey(base64PrivateKey);
         byte[] bytes = encryptByKey(data, key);
-        return Base64.encodeBase64String(bytes);
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
 }

@@ -13,7 +13,7 @@ public class EncryptedHttpUtilsTest {
 
     @Test
     public void test() throws Exception {
-        String url = Constants.host + "/mobile/idtoken/userInfo";
+        String url = Constants.TEMP_HOST + "/mobile/idtoken/userInfo";
         String body = "{\"data\": \"hahaha\"}";
         System.out.println(body);
         FakeTokenStore tokenStore = new FakeTokenStore();

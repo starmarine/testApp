@@ -29,9 +29,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.binding.SmsActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
+
+        <activity
+            android:name=".activity.binding.SmallCaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>
