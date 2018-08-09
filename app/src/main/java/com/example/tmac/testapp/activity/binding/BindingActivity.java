@@ -23,6 +23,13 @@ import com.example.tmac.testapp.utils.http.HttpUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+/**
+ * 绑定分为4步:其中234步骤都需要传给服务器端ticket
+ * 1、扫码获取host和ticket
+ * 2、生成公私钥对，上传公钥，获取手机号      MicBindFacilityDto
+ * 3、发送验证码      DevicePhoneNumberDto
+ * 4、提交验证码做绑定   FinishBindDto
+ */
 public class BindingActivity extends AbstractBaseActivity {
     public static String INTENT_KEY_BINDINGVO= "deviceBindingVO";
     public static BindingDto bindingDto;
@@ -45,6 +52,9 @@ public class BindingActivity extends AbstractBaseActivity {
         });
     }
 
+    /**
+     * 调用扫码的activity
+     */
     public void scanMarginScanner() {
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setOrientationLocked(false);

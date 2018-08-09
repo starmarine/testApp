@@ -21,6 +21,13 @@ public class Constants {
         TEMP_HOST = hostVar;
     }
 
+    /**
+     * 1、优先使用preferences中的host
+     * 2、其次使用静态变量TEMP_HOST，这个变量是绑定前扫码获取到的BindingDto中的字段
+     *
+     * @param path
+     * @return
+     */
     public static String generateURL(String path){
         String host = ProfileUtils.getHost();
         if(StringUtils.isNotBlank(host)){

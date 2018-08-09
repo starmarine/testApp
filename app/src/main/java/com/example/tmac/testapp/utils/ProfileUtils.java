@@ -13,6 +13,7 @@ public class ProfileUtils {
     public static String KEY_DISPLAY_NAME = "DISPLAY_NAME";
     public static String KEY_PUBLIC_KEY = "PUBLIC_KEY";
     public static String KEY_PRIVATE_KEY = "PRIVATE_KEY";
+    //---------------绑定成功之后要把服务器的地址放到这里
     public static String KEY_HOST = "HOST";
 
     public static String getDeviceCode(){
