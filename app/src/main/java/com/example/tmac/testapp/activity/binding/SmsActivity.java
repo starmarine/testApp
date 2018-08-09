@@ -151,7 +151,14 @@ public class SmsActivity extends AbstractBaseActivity {
             //-----------------TODO 需要跳转到新的页面，展示动态码和扫码的页面------------------------
 
             //--------设置deviceCode标志已经绑定---------------
+            /**
+             * TODO
+             * deviceCode和deviceBindingVO以及host,以及public private key都应该弄到一个对象中，不要散布在多处
+             * 最后在这里统一设置到Profile中
+             */
             ProfileUtils.setDeviceCode(deviceCode);
+            ProfileUtils.setHost(Constants.TEMP_HOST);
+            ProfileUtils.setDisplayName(deviceBindingVO.getDisplayName());
 
             Intent intent = new Intent(SmsActivity.this, MainPageActivity.class);
             startActivity(intent);

@@ -39,14 +39,6 @@ public class ProfileUtils {
         return getUserPreferences().getString(KEY_PRIVATE_KEY,null);
     }
 
-    public static void setTicket(KeyUtils.Base64KeyPair keyPair){
-        SharedPreferences sp = getUserPreferences();
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString(KEY_PUBLIC_KEY, keyPair.publicKey);
-        editor.putString(KEY_PUBLIC_KEY, keyPair.privateKey);
-        editor.commit();
-    }
-
     public static void setKeyPair(KeyUtils.Base64KeyPair keyPair){
         SharedPreferences sp = getUserPreferences();
         SharedPreferences.Editor editor = sp.edit();
@@ -54,15 +46,28 @@ public class ProfileUtils {
         editor.putString(KEY_PRIVATE_KEY, keyPair.privateKey);
         editor.commit();
 
-
-    }
-
-    public static String getDisplayName(){
-        return getUserPreferences().getString(KEY_DISPLAY_NAME,null);
     }
 
     public static String getHost(){
         return getUserPreferences().getString(KEY_HOST,null);
+    }
+
+    public static void setHost(String host){
+        SharedPreferences sp = getUserPreferences();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(KEY_HOST, host);
+        editor.commit();
+    }
+
+    public static void setDisplayName(String displayName){
+        SharedPreferences sp = getUserPreferences();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(KEY_DISPLAY_NAME, displayName);
+        editor.commit();
+    }
+
+    public static String getDisplayName(){
+        return getUserPreferences().getString(KEY_DISPLAY_NAME,null);
     }
 
     private static SharedPreferences getUserPreferences(){

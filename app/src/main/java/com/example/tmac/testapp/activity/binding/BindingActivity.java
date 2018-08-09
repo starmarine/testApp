@@ -101,6 +101,7 @@ public class BindingActivity extends AbstractBaseActivity {
         protected DeviceBindingVO doInBackground(Void... params) {
             Log.i("BindingActivity","click netButton");
             String server = bindingDto.getServer();
+            //------------TODO 这里需要修改,不能用在Constants中-----------
             Constants.updateHost(server);
             //--------------生成公私钥对-------------
             KeyUtils.Base64KeyPair keyPair = KeyUtils.generateKeyPair();
