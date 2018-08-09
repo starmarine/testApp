@@ -33,6 +33,10 @@
 
         </activity>
 
+        <activity android:name=".activity.MainPageActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+
         <activity
             android:name=".activity.binding.SmallCaptureActivity"
             android:screenOrientation="fullSensor"

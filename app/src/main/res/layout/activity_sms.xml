@@ -14,10 +14,39 @@
         android:text="Hello World!" />
 
     <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+
+    <TextView
         android:id="@+id/testTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请扫描二维码进行ID管家绑定!" />
+
+    <EditText
+        android:id="@+id/phoneInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/verifyCodeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/sendSmsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送验证码"/>
+
+    <Button
+        android:id="@+id/bindBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="绑定"/>
 
 </LinearLayout>
 

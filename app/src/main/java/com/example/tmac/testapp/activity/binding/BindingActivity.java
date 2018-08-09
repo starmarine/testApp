@@ -25,6 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class BindingActivity extends AbstractBaseActivity {
     public static String INTENT_KEY_BINDINGVO= "deviceBindingVO";
+    public static BindingDto bindingDto;
 
     private TextView textView1;
     private Button scanButton;
@@ -61,10 +62,10 @@ public class BindingActivity extends AbstractBaseActivity {
             } else {
                 String content = result.getContents();
                 Log.i("BindingActivity", "Scanned:" + content);
-                BindingDto dto = JSON.parseObject(content,BindingDto.class);
-                Toast.makeText(this, "Scanned1: " + dto, Toast.LENGTH_LONG).show();
+                bindingDto = JSON.parseObject(content,BindingDto.class);
+                Toast.makeText(this, "Scanned1: " + bindingDto, Toast.LENGTH_LONG).show();
                 //-----------TODO验证dto是否符合格式---------
-                new DownloadTask(dto).execute();
+                new DownloadTask(bindingDto).execute();
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment

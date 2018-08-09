@@ -38,12 +38,22 @@ public class ProfileUtils {
         return getUserPreferences().getString(KEY_PRIVATE_KEY,null);
     }
 
-    public static void setKeyPair(KeyUtils.Base64KeyPair keyPair){
+    public static void setTicket(KeyUtils.Base64KeyPair keyPair){
         SharedPreferences sp = getUserPreferences();
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(KEY_PUBLIC_KEY, keyPair.publicKey);
         editor.putString(KEY_PUBLIC_KEY, keyPair.privateKey);
         editor.commit();
+    }
+
+    public static void setKeyPair(KeyUtils.Base64KeyPair keyPair){
+        SharedPreferences sp = getUserPreferences();
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(KEY_PUBLIC_KEY, keyPair.publicKey);
+        editor.putString(KEY_PRIVATE_KEY, keyPair.privateKey);
+        editor.commit();
+
+
     }
 
     public static String getDisplayName(){
