@@ -15,7 +15,6 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
-//import android.util.Base64;
 
 /**
  * Created by tmac on 2018/3/29.
@@ -44,8 +43,6 @@ public class KeyUtils {
             KeyPair genKeyPair = keyGen.genKeyPair();
             PublicKey publicKey = genKeyPair.getPublic();
             PrivateKey privateKey = genKeyPair.getPrivate();
-//            String base64PublicKey = Base64.encodeToString(publicKey.getEncoded(),Base64.NO_WRAP);
-//            String base64PrivateKey = Base64.encodeToString(privateKey.getEncoded(),Base64.NO_WRAP);
             String base64PublicKey = Base64.encodeToString(publicKey.getEncoded(), Base64.DEFAULT);
             String base64PrivateKey = Base64.encodeToString(privateKey.getEncoded(), Base64.DEFAULT);
             Base64KeyPair result = new Base64KeyPair(base64PublicKey, base64PrivateKey);
@@ -93,7 +90,7 @@ public class KeyUtils {
     }
 
     public static byte[] decryptByKey(byte[] data, Key key) throws GeneralSecurityException {
-        Cipher cipher = Cipher.getInstance(ENCRYPTION_TYPE);
+        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.DECRYPT_MODE, key);
         return cipher.doFinal(data);
     }

@@ -6,6 +6,8 @@ import com.example.tmac.testapp.utils.ProfileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class Constants {
+    public static boolean inTestCase = false;
+
     public static String TEMP_HOST;
 
     public static String PATH_EXCHANGE_AES_KEY = "/mobile/idtoken/exchange/aeskey";
@@ -13,9 +15,7 @@ public class Constants {
     public static String PATH_SEND_VERIFY_CODE= "/mobile/idtoken/sendVerifyCode";
     public static String PATH_FINISH_BIND= "/mobile/idtoken/finishBind";
     public static String PATH_DELETE_BIND= "/mobile/idtoken/deleteBind";
-
-
-    public static String URL_EXCHANGE_AES_KEY = TEMP_HOST + PATH_EXCHANGE_AES_KEY;
+    public static String PATH_EXCHANGE_TOTP_KEY= "/mobile/idtoken/exchangeTotpKey";
 
     public static void updateHost(String hostVar){
         TEMP_HOST = hostVar;
@@ -29,13 +29,20 @@ public class Constants {
      * @return
      */
     public static String generateURL(String path){
-        String host = ProfileUtils.getHost();
-        if(StringUtils.isNotBlank(host)){
-            return host + path;
-        }else if(StringUtils.isNotBlank(TEMP_HOST)){
+        if(inTestCase){
+            //------------为测试准备的----------
             return TEMP_HOST + path;
         }else{
-            throw new ApplicationException("no host is found");
+            String host = ProfileUtils.getHost();
+            if(StringUtils.isNotBlank(host)){
+                return host + path;
+            }else if(StringUtils.isNotBlank(TEMP_HOST)){
+                return TEMP_HOST + path;
+            }else{
+                throw new ApplicationException("no host is found");
+            }
         }
+
+
     }
 }

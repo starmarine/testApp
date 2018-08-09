@@ -1,9 +1,9 @@
 package com.example.tmac.testapp.utils.codec;
 
+import android.util.Log;
+
 import com.example.tmac.testapp.exception.ApplicationException;
 import com.example.tmac.testapp.exception.DecryptionException;
-
-import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
@@ -86,7 +86,7 @@ public class AesKeyUtils {
     }
 
     public static Ciphertext decryptBase64TextByAES(String base64Content, String password) {
-        byte[] content = Base64.decodeBase64(base64Content);
+        byte[] content = android.util.Base64.decode(base64Content,android.util.Base64.DEFAULT);
         return decryptAES(content,password);
     }
 
@@ -97,8 +97,9 @@ public class AesKeyUtils {
      */
     public static byte[] encryptAESCBC(String base64Secret, byte[] data) {
         try{
-            byte[] key = Base64.decodeBase64(base64Secret.split("\n")[0]);
-            byte[] initVector = Base64.decodeBase64(base64Secret.split("\n")[1]);
+            Log.i("base64Secret",base64Secret);
+            byte[] key = android.util.Base64.decode(base64Secret.split("\n")[0],android.util.Base64.NO_PADDING);
+            byte[] initVector = android.util.Base64.decode(base64Secret.split("\n")[1],android.util.Base64.NO_PADDING);
 
             System.out.println(key.length);
 
@@ -122,8 +123,8 @@ public class AesKeyUtils {
      */
     public static byte[] decryptAESCBC(String base64Secret, byte[] data){
         try{
-            byte[] key = Base64.decodeBase64(base64Secret.split("\n")[0]);
-            byte[] initVector = Base64.decodeBase64(base64Secret.split("\n")[1]);
+            byte[] key = android.util.Base64.decode(base64Secret.split("\n")[0],android.util.Base64.NO_PADDING);
+            byte[] initVector = android.util.Base64.decode(base64Secret.split("\n")[1],android.util.Base64.NO_PADDING);
 
             IvParameterSpec iv = new IvParameterSpec(initVector);
             SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");

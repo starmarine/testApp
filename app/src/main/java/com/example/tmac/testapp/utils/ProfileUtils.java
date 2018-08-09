@@ -3,7 +3,9 @@ package com.example.tmac.testapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.alibaba.fastjson.JSON;
 import com.example.tmac.testapp.MyApplication;
+import com.example.tmac.testapp.dto.vo.TotpKeyVO;
 import com.example.tmac.testapp.utils.codec.KeyUtils;
 
 public class ProfileUtils {
@@ -15,6 +17,9 @@ public class ProfileUtils {
     public static String KEY_PRIVATE_KEY = "PRIVATE_KEY";
     //---------------绑定成功之后要把服务器的地址放到这里
     public static String KEY_HOST = "HOST";
+    public static String KEY_TOTP_KEY = "KEY_TOTP_KEY";
+
+
 
     public static String getDeviceCode(){
         return getUserPreferences().getString(KEY_DEVICE_CODE,null);
@@ -64,6 +69,24 @@ public class ProfileUtils {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(KEY_DISPLAY_NAME, displayName);
         editor.commit();
+    }
+
+    public static void setTotp(TotpKeyVO totpKeyVO){
+        SharedPreferences sp = getUserPreferences();
+        SharedPreferences.Editor editor = sp.edit();
+        String json = JSON.toJSONString(totpKeyVO);
+        editor.putString(KEY_TOTP_KEY, json);
+        editor.commit();
+    }
+
+    public static TotpKeyVO getTotp(){
+        String totpKeyVOString = getUserPreferences().getString(KEY_TOTP_KEY,null);
+        if(totpKeyVOString == null){
+            return null;
+        }else{
+            TotpKeyVO vo = JSON.parseObject(totpKeyVOString, TotpKeyVO.class);
+            return vo;
+        }
     }
 
     public static String getDisplayName(){

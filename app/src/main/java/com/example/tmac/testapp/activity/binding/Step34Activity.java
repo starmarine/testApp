@@ -159,6 +159,7 @@ public class Step34Activity extends AbstractBaseActivity {
                  */
                 ProfileUtils.setDeviceCode(deviceCode);
                 ProfileUtils.setHost(Constants.TEMP_HOST);
+                Log.i("host_is",Constants.TEMP_HOST);
                 ProfileUtils.setDisplayName(deviceBindingVO.getDisplayName());
 
                 Intent intent = new Intent(Step34Activity.this, MainPageActivity.class);

@@ -13,5 +13,17 @@
         android:layout_height="wrap_content"
         android:text="绑定成功" />
 
+    <TextView
+        android:id="@+id/tvTotpKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvTotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
 </LinearLayout>
 

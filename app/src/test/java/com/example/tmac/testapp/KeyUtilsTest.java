@@ -14,7 +14,7 @@ import org.junit.Test;
 //@RunWith(RobolectricTestRunner.class)
 public class KeyUtilsTest {
 
-    private String data = "hahaha";
+    private String data = "pdqa/9BlcLXIewJFCYm1kdpaQYsVL8YirUs2MsLKxgBZH390rZTTo00IUwPBOjj20L5sNtDwfDCLmxfTJ48JiQ==";
 
     @Test
     public void testGenerateKeyPair() throws Exception {
@@ -26,11 +26,13 @@ public class KeyUtilsTest {
 
     @Test
     public void testEncryptByPublicKey() throws Exception{
-        KeyUtils.Base64KeyPair keyPair = KeyUtils.generateKeyPair();
-        String encrypted = KeyUtils.encryptByPublicKey(data.getBytes("UTF-8"),keyPair.publicKey);
+//        KeyUtils.Base64KeyPair keyPair = KeyUtils.generateKeyPair();
+        String publicKey = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALJrIg44qC2IsSdyixaiXvIhLME32Zlc+qJp8J0NuQ+t\\njPYgyhmcA71wtPC70A50U/WDiZG1ZqdabZho2JZGhgMCAwEAAQ==\\n";
+        String privateKey = "";
+        String encrypted = "pdqa/9BlcLXIewJFCYm1kdpaQYsVL8YirUs2MsLKxgBZH390rZTTo00IUwPBOjj20L5sNtDwfDCLmxfTJ48JiQ==";
         System.out.println(encrypted);
 
-        String decrypted = KeyUtils.decryptByPrivateKey(encrypted,keyPair.privateKey);
+        String decrypted = KeyUtils.decryptByPrivateKey(encrypted,privateKey);
         System.out.println(decrypted);
 
         Assert.assertEquals(data,decrypted);

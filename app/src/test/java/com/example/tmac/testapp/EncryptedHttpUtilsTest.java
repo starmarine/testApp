@@ -13,7 +13,9 @@ public class EncryptedHttpUtilsTest {
 
     @Test
     public void test() throws Exception {
-        String url = Constants.TEMP_HOST + "/mobile/idtoken/userInfo";
+        Constants.inTestCase = true;
+        Constants.TEMP_HOST = "http://localhost:6060";
+        String url = Constants.generateURL("/mobile/idtoken/userInfo");
         String body = "{\"data\": \"hahaha\"}";
         System.out.println(body);
         FakeTokenStore tokenStore = new FakeTokenStore();

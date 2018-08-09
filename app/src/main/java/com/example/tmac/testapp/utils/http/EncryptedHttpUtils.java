@@ -1,12 +1,13 @@
 package com.example.tmac.testapp.utils.http;
 
+import android.util.Base64;
+
 import com.example.tmac.testapp.constants.Constants;
 import com.example.tmac.testapp.exception.ApplicationException;
 import com.example.tmac.testapp.utils.codec.AesKeyUtils;
 import com.example.tmac.testapp.utils.codec.KeyUtils;
 import com.example.tmac.testapp.utils.token.ITokenStore;
-
-import org.apache.commons.codec.binary.Base64;
+import com.example.tmac.testapp.utils.token.PreferenceTokenStore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,10 @@ import java.util.Map;
  */
 
 public class EncryptedHttpUtils {
+
+    public static String post(String url, String body){
+        return post(url,body,new PreferenceTokenStore(),null,0);
+    }
 
     public static String post(String url, String body, ITokenStore tokenStore, HandlerWrapper handler, int retry){
         if(retry > 1){
@@ -28,12 +33,12 @@ public class EncryptedHttpUtils {
             //--------------------没有token-------------------
             if(tokenStore.isBinded()){
                 //----手机已经绑定，发送challenge获取token---------------
-                HttpResponse httpResponse = doPost(Constants.URL_EXCHANGE_AES_KEY,"",deviceCode);
+                HttpResponse httpResponse = doPost(Constants.generateURL(Constants.PATH_EXCHANGE_AES_KEY),"",deviceCode);
                 String encryptedToken = httpResponse.getBody();
-                System.out.println(encryptedToken);
+                System.out.println("body is:"+encryptedToken);
                 token = KeyUtils.decryptByPrivateKey(encryptedToken,tokenStore.getPrivateKey());
                 tokenStore.saveToken(token);
-                System.out.println(token);
+                System.out.println("decrypted:"+token);
                 return post(url,body,tokenStore,handler,retry+1);
             }else{
                 //----手机未绑定,页面提示toast先去绑定手机---------------
@@ -42,16 +47,16 @@ public class EncryptedHttpUtils {
         }else{
             //--------------------已经有token-----------------
 //            String encryptedBody = AesKeyUtils.encryptAES(body,token).getBase64();
+            System.out.println("token: " + token);
             byte[] bytes = AesKeyUtils.encryptAESCBC(token,body.getBytes());
-            String encryptedBody = Base64.encodeBase64String(bytes);
+//            String encryptedBody = Base64.encodeBase64String(bytes);
+            String encryptedBody = Base64.encodeToString(bytes, Base64.DEFAULT);
             System.out.println(encryptedBody);
             HttpResponse httpResponse = doPost(url,encryptedBody,deviceCode);
             if(httpResponse.getStatus() == 200){
                 //----------------处理正常的返回-------------------
                 String encryptedMessage = httpResponse.getBody();
-//                Ciphertext decryptedCipher = AesKeyUtils.decryptBase64TextByAES(encryptedMessage,token);
-//                String decrypted = decryptedCipher.getString();
-                byte[] encryptedBytes = Base64.decodeBase64(encryptedMessage);
+                byte[] encryptedBytes = Base64.decode(encryptedMessage,Base64.DEFAULT);
                 byte[] decodeBytes = AesKeyUtils.decryptAESCBC(token,encryptedBytes);
                 String decrypted = new String(decodeBytes);
                 return decrypted;
