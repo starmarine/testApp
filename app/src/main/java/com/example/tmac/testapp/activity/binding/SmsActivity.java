@@ -59,7 +59,7 @@ public class SmsActivity extends AbstractBaseActivity {
             @Override
             public void onClick(View view) {
                 DevicePhoneNumberDto dto = new DevicePhoneNumberDto(BindingActivity.bindingDto.getTicket(),phoneInput.getText().toString());
-                new SendSmsTask(dto).execute();
+                new Step3Task(dto).execute();
             }
         });
 
@@ -77,7 +77,7 @@ public class SmsActivity extends AbstractBaseActivity {
                     DeviceInfo deviceInfo = new DeviceInfo("android","type",30);
                     dto.setDeviceInfo(deviceInfo);
 
-                    new FinishBindTask(dto).execute();
+                    new Step4Task(dto).execute();
                 }else{
                     Toast.makeText(SmsActivity.this,"请填写验证码",Toast.LENGTH_SHORT).show();
                 }
@@ -85,11 +85,11 @@ public class SmsActivity extends AbstractBaseActivity {
         });
     }
 
-    class SendSmsTask extends AsyncTask<Void, Integer, RestResult> {
+    class Step3Task extends AsyncTask<Void, Integer, RestResult> {
 
         private DevicePhoneNumberDto devicePhoneNumberDto;
 
-        public SendSmsTask(DevicePhoneNumberDto dto){
+        public Step3Task(DevicePhoneNumberDto dto){
             this.devicePhoneNumberDto = dto;
         }
 
@@ -119,11 +119,11 @@ public class SmsActivity extends AbstractBaseActivity {
         }
     }
 
-    class FinishBindTask extends AsyncTask<Void, Integer, RestResult> {
+    class Step4Task extends AsyncTask<Void, Integer, RestResult> {
 
         private FinishBindDto finishBindDto;
 
-        public FinishBindTask(FinishBindDto dto){
+        public Step4Task(FinishBindDto dto){
             this.finishBindDto = dto;
         }
 

@@ -75,7 +75,7 @@ public class BindingActivity extends AbstractBaseActivity {
                 bindingDto = JSON.parseObject(content,BindingDto.class);
                 Toast.makeText(this, "Scanned1: " + bindingDto, Toast.LENGTH_LONG).show();
                 //-----------TODO验证dto是否符合格式---------
-                new DownloadTask(bindingDto).execute();
+                new Step2Task(bindingDto).execute();
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
@@ -90,10 +90,10 @@ public class BindingActivity extends AbstractBaseActivity {
         startActivity(intent);
     }
 
-    class DownloadTask extends AsyncTask<Void, Integer, DeviceBindingVO> {
+    class Step2Task extends AsyncTask<Void, Integer, DeviceBindingVO> {
         private BindingDto bindingDto;
 
-        public DownloadTask(BindingDto dto){
+        public Step2Task(BindingDto dto){
             bindingDto = dto;
         }
 
