@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.tmac.testapp.activity.binding.SmsActivity;
+import com.example.tmac.testapp.activity.binding.Step34Activity;
 import com.example.tmac.testapp.utils.ActivityCollector;
 
 public class AbstractBaseActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class AbstractBaseActivity extends AppCompatActivity {
              Log.i("当前主线程是----->", Thread.currentThread()+"");
              Toast toast = Toast.makeText(AbstractBaseActivity.this, "这是一个普通的Toast!", Toast.LENGTH_SHORT);
              toast.show();
-             Intent i = new Intent(AbstractBaseActivity.this,SmsActivity.class);
+             Intent i = new Intent(AbstractBaseActivity.this,Step34Activity.class);
              startActivity(i);
          };
     };
@@ -70,7 +70,7 @@ public class AbstractBaseActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     ActivityCollector.finishAll(); // 销毁所有活动
-                    Intent intent = new Intent(context, SmsActivity.class);
+                    Intent intent = new Intent(context, Step34Activity.class);
                     context.startActivity(intent); // 重新启动LoginActivity
                 }
             });

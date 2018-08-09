@@ -23,13 +23,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.binding.BindingActivity">
+        <activity android:name=".activity.binding.Step12Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.binding.SmsActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.binding.Step34Activity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
 

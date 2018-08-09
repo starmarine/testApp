@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.tmac.testapp.activity.MainPageActivity;
-import com.example.tmac.testapp.activity.binding.BindingActivity;
+import com.example.tmac.testapp.activity.binding.Step12Activity;
 import com.example.tmac.testapp.utils.ProfileUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         }else {
             //---------未绑定,显示绑定页面-----------
             Log.i("test", "no deviceCode");
-            jump(BindingActivity.class);
+            jump(Step12Activity.class);
         }
     }
 

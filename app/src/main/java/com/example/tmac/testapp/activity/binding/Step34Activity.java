@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.UUID;
 
-public class SmsActivity extends AbstractBaseActivity {
+public class Step34Activity extends AbstractBaseActivity {
     private TextView textViewDisplayName;
     private TextView textViewUserName;
     private EditText phoneInput;
@@ -40,15 +40,15 @@ public class SmsActivity extends AbstractBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("SmsActivity","into SmsActivity");
+        Log.i("Step34Activity","into Step34Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         textViewDisplayName = findViewById(R.id.textViewDisplayName);
         textViewUserName = findViewById(R.id.textViewUserName);
         phoneInput = findViewById(R.id.phoneInput);
         verifyCodeInput = findViewById(R.id.verifyCodeInput);
-        deviceBindingVO = (DeviceBindingVO) getIntent().getSerializableExtra(BindingActivity.INTENT_KEY_BINDINGVO);
-        Log.i("SmsActivity",deviceBindingVO.toString());
+        deviceBindingVO = (DeviceBindingVO) getIntent().getSerializableExtra(Step12Activity.INTENT_KEY_BINDINGVO);
+        Log.i("Step34Activity",deviceBindingVO.toString());
         textViewDisplayName.setText(deviceBindingVO.getDisplayName());
         textViewUserName.setText(deviceBindingVO.getUserId());
         phoneInput.setText(deviceBindingVO.getPhone());
@@ -58,7 +58,7 @@ public class SmsActivity extends AbstractBaseActivity {
         sendSmsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DevicePhoneNumberDto dto = new DevicePhoneNumberDto(BindingActivity.bindingDto.getTicket(),phoneInput.getText().toString());
+                DevicePhoneNumberDto dto = new DevicePhoneNumberDto(Step12Activity.bindingDto.getTicket(),phoneInput.getText().toString());
                 new Step3Task(dto).execute();
             }
         });
@@ -73,13 +73,13 @@ public class SmsActivity extends AbstractBaseActivity {
                     deviceCode = UUID.randomUUID().toString();
                     dto.setDeviceCode(deviceCode);
                     dto.setPublicKey(ProfileUtils.getPublicKey());
-                    dto.setTicket(BindingActivity.bindingDto.getTicket());
+                    dto.setTicket(Step12Activity.bindingDto.getTicket());
                     DeviceInfo deviceInfo = new DeviceInfo("android","type",30);
                     dto.setDeviceInfo(deviceInfo);
 
                     new Step4Task(dto).execute();
                 }else{
-                    Toast.makeText(SmsActivity.this,"请填写验证码",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Step34Activity.this,"请填写验证码",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -95,13 +95,13 @@ public class SmsActivity extends AbstractBaseActivity {
 
         @Override
         protected RestResult doInBackground(Void... params) {
-            Log.i("SmsActivity","click netButton");
+            Log.i("Step34Activity","click netButton");
             String json = JSON.toJSONString(devicePhoneNumberDto);
-            Log.i("SmsActivity",json);
+            Log.i("Step34Activity",json);
             String body = HttpUtils.post(Constants.generateURL(Constants.PATH_SEND_VERIFY_CODE),json);
-            Log.i("SmsActivity",body);
+            Log.i("Step34Activity",body);
             RestResult restResult = JSON.parseObject(body, RestResult.class);
-            Log.i("SmsActivity",restResult.toString());
+            Log.i("Step34Activity",restResult.toString());
             return restResult;
         }
 
@@ -113,9 +113,9 @@ public class SmsActivity extends AbstractBaseActivity {
 
     private void updateUI(RestResult result){
         if("OK".equalsIgnoreCase(result.getHttpStatus())){
-            Toast.makeText(SmsActivity.this,"发送短信成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Step34Activity.this,"发送短信成功",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(SmsActivity.this,"发送短信失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Step34Activity.this,"发送短信失败",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -147,23 +147,29 @@ public class SmsActivity extends AbstractBaseActivity {
 
     private void doFinishBind(RestResult result){
         if("OK".equalsIgnoreCase(result.getHttpStatus())){
-            Toast.makeText(SmsActivity.this,"绑定成功",Toast.LENGTH_SHORT).show();
-            //-----------------TODO 需要跳转到新的页面，展示动态码和扫码的页面------------------------
+            if("操作成功".equalsIgnoreCase(result.getMessage())){
+                Toast.makeText(Step34Activity.this,"绑定成功",Toast.LENGTH_SHORT).show();
+                //-----------------TODO 需要跳转到新的页面，展示动态码和扫码的页面------------------------
 
-            //--------设置deviceCode标志已经绑定---------------
-            /**
-             * TODO
-             * deviceCode和deviceBindingVO以及host,以及public private key都应该弄到一个对象中，不要散布在多处
-             * 最后在这里统一设置到Profile中
-             */
-            ProfileUtils.setDeviceCode(deviceCode);
-            ProfileUtils.setHost(Constants.TEMP_HOST);
-            ProfileUtils.setDisplayName(deviceBindingVO.getDisplayName());
+                //--------设置deviceCode标志已经绑定---------------
+                /**
+                 * TODO
+                 * deviceCode和deviceBindingVO以及host,以及public private key都应该弄到一个对象中，不要散布在多处
+                 * 最后在这里统一设置到Profile中
+                 */
+                ProfileUtils.setDeviceCode(deviceCode);
+                ProfileUtils.setHost(Constants.TEMP_HOST);
+                ProfileUtils.setDisplayName(deviceBindingVO.getDisplayName());
 
-            Intent intent = new Intent(SmsActivity.this, MainPageActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(Step34Activity.this, MainPageActivity.class);
+                startActivity(intent);
+
+            }else{
+                Toast.makeText(Step34Activity.this,result.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
         }else{
-            Toast.makeText(SmsActivity.this,"绑定失败",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Step34Activity.this,"绑定失败,调用后台出错",Toast.LENGTH_SHORT).show();
         }
     }
 
