@@ -17,6 +17,10 @@ public class Constants {
     public static String PATH_DELETE_BIND= "/mobile/idtoken/deleteBind";
     public static String PATH_EXCHANGE_TOTP_KEY= "/mobile/idtoken/exchangeTotpKey";
 
+    //--------------------------MFA的二维码扫码---------------------------------
+    public static String PATH_QRCODE_SCAN= "/mobile/idtoken/qrcode/scan";
+    public static String PATH_QRCODE_CONFIRM= "/mobile/idtoken/qrcode/confirm";
+
     public static void updateHost(String hostVar){
         TEMP_HOST = hostVar;
     }

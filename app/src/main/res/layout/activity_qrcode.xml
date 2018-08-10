@@ -8,33 +8,33 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tvSuccess"
+        android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="绑定成功" />
 
     <TextView
-        android:id="@+id/tvTotpKey"
+        android:id="@+id/tvAccountName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
 
     <TextView
-        android:id="@+id/tvTotp"
+        android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="" />
-
-    <TextView
-        android:id="@+id/tvProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GAGA" />
 
     <Button
-        android:id="@+id/btnScan"
+        android:id="@+id/btnConfirmQrcode"
         android:layout_width="wrap_content"
-        android:text="扫描二维码"
+        android:text="确认登录"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnCancelQrcode"
+        android:layout_width="wrap_content"
+        android:text="取消登录"
         android:layout_height="wrap_content" />
 
 </LinearLayout>

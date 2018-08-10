@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.example.tmac.testapp.exception.ApplicationException;
-import com.example.tmac.testapp.utils.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.Map;
