@@ -9,6 +9,7 @@ import com.example.tmac.testapp.utils.codec.KeyUtils;
 import com.example.tmac.testapp.utils.token.ITokenStore;
 import com.example.tmac.testapp.utils.token.PreferenceTokenStore;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,8 +59,12 @@ public class EncryptedHttpUtils {
                 String encryptedMessage = httpResponse.getBody();
                 byte[] encryptedBytes = Base64.decode(encryptedMessage,Base64.DEFAULT);
                 byte[] decodeBytes = AesKeyUtils.decryptAESCBC(token,encryptedBytes);
-                String decrypted = new String(decodeBytes);
-                return decrypted;
+                try{
+                    String decrypted = new String(decodeBytes,"UTF-8");
+                    return decrypted;
+                }catch(UnsupportedEncodingException e){
+                    throw new ApplicationException(e.getMessage(),e);
+                }
             } else if(httpResponse.getStatus() == 401){
                 //-----------challenge消息,包含了token----------------
                 String encryptedToken = httpResponse.getBody();
