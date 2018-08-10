@@ -42,7 +42,7 @@ public class Step34Activity extends AbstractBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("Step34Activity","into Step34Activity");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sms);
+        setContentView(R.layout.activity_step34);
         textViewDisplayName = findViewById(R.id.textViewDisplayName);
         textViewUserName = findViewById(R.id.textViewUserName);
         phoneInput = findViewById(R.id.phoneInput);

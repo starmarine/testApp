@@ -125,4 +125,10 @@ public class TOTPPasswordGenerator {
 		String code = generateTOTP(HexUtils.parseByte2HexStr(key.getBytes(Charset.forName("utf-8"))), steps, "6");
 		return code;
 	}
+
+	public static String computeProgress(long diff, int duration) {
+		Date date = new Date();
+		String progress = ((date.getTime() - diff)/ 1000) % duration + "";
+		return progress;
+	}
 }

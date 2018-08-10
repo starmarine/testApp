@@ -40,7 +40,7 @@ public class Step12Activity extends AbstractBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_binding);
+        setContentView(R.layout.activity_step12);
         textView1 = findViewById(R.id.bindingTextView);
         scanButton = findViewById(R.id.scanButton);
         scanButton.setOnClickListener(new View.OnClickListener() {

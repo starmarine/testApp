@@ -46,6 +46,7 @@ public class KeyUtils {
             String base64PublicKey = Base64.encodeToString(publicKey.getEncoded(), Base64.DEFAULT);
             String base64PrivateKey = Base64.encodeToString(privateKey.getEncoded(), Base64.DEFAULT);
             Base64KeyPair result = new Base64KeyPair(base64PublicKey, base64PrivateKey);
+
             return result;
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage(),ex);
