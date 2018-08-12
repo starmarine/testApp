@@ -11,9 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.example.tmac.testapp.MainActivity;
 import com.example.tmac.testapp.R;
 import com.example.tmac.testapp.activity.AbstractBaseActivity;
-import com.example.tmac.testapp.activity.MainPageActivity;
 import com.example.tmac.testapp.constants.Constants;
 import com.example.tmac.testapp.dto.dto.DeviceInfo;
 import com.example.tmac.testapp.dto.dto.DevicePhoneNumberDto;
@@ -162,7 +162,7 @@ public class Step34Activity extends AbstractBaseActivity {
                 Log.i("host_is",Constants.TEMP_HOST);
                 ProfileUtils.setDisplayName(deviceBindingVO.getDisplayName());
 
-                Intent intent = new Intent(Step34Activity.this, MainPageActivity.class);
+                Intent intent = new Intent(Step34Activity.this, MainActivity.class);
                 startActivity(intent);
 
             }else{
