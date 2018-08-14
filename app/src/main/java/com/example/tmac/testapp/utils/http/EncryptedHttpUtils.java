@@ -2,7 +2,9 @@ package com.example.tmac.testapp.utils.http;
 
 import android.util.Base64;
 
+import com.alibaba.fastjson.JSON;
 import com.example.tmac.testapp.constants.Constants;
+import com.example.tmac.testapp.dto.vo.RestResult;
 import com.example.tmac.testapp.exception.ApplicationException;
 import com.example.tmac.testapp.utils.codec.AesKeyUtils;
 import com.example.tmac.testapp.utils.codec.KeyUtils;
@@ -57,14 +59,8 @@ public class EncryptedHttpUtils {
             if(httpResponse.getStatus() == 200){
                 //----------------处理正常的返回-------------------
                 String encryptedMessage = httpResponse.getBody();
-                byte[] encryptedBytes = Base64.decode(encryptedMessage,Base64.DEFAULT);
-                byte[] decodeBytes = AesKeyUtils.decryptAESCBC(token,encryptedBytes);
-                try{
-                    String decrypted = new String(decodeBytes,"UTF-8");
-                    return decrypted;
-                }catch(UnsupportedEncodingException e){
-                    throw new ApplicationException(e.getMessage(),e);
-                }
+                String decrypted = decrypt(encryptedMessage,token);
+                return decrypted;
             } else if(httpResponse.getStatus() == 401){
                 //-----------challenge消息,包含了token----------------
                 String encryptedToken = httpResponse.getBody();
@@ -81,12 +77,25 @@ public class EncryptedHttpUtils {
                     handler.sendMessage("用户已经被禁用,请联系管理员");
                 }
             }else {
-                throw new ApplicationException("未知错误status:"+httpResponse.getStatus()+" message:"+httpResponse.getBody());
+                String decryptedBody = decrypt(httpResponse.getBody(),token);
+                RestResult result = JSON.parseObject(decryptedBody,RestResult.class);
+                throw new ApplicationException("未知错误status:"+httpResponse.getStatus()+" message:"+ result.getMessage());
             }
 
         }
 
         return null;
+    }
+
+    private static String decrypt(String encryptedMessage,String token){
+        byte[] encryptedBytes = Base64.decode(encryptedMessage,Base64.DEFAULT);
+        byte[] decodeBytes = AesKeyUtils.decryptAESCBC(token,encryptedBytes);
+        try{
+            String decrypted = new String(decodeBytes,"UTF-8");
+            return decrypted;
+        }catch(UnsupportedEncodingException e){
+            throw new ApplicationException(e.getMessage(),e);
+        }
     }
 
     private static HttpResponse doPost(String url,String body,String deviceCode){

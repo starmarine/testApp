@@ -24,6 +24,7 @@ import com.example.tmac.testapp.dto.vo.ScanQrcodeVO;
 import com.example.tmac.testapp.fragment.TabMfaFragment;
 import com.example.tmac.testapp.fragment.TabUserLogFragment;
 import com.example.tmac.testapp.fragment.TabUserSettingFragment;
+import com.example.tmac.testapp.utils.LogUtil;
 import com.example.tmac.testapp.utils.ProfileUtils;
 import com.example.tmac.testapp.utils.http.EncryptedHttpUtils;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -118,15 +119,16 @@ public class MainActivity extends AbstractBaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                Log.d("Step12Activity", "Cancelled scan");
+                LogUtil.i("Cancelled scan");
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 String authId = result.getContents();
-                Log.i("Step12Activity", "Scanned:" + authId);
+                LogUtil.i("Scanned:" + authId);
                 ScanQrcodeDto bindingDto = new ScanQrcodeDto(authId, ProfileUtils.getDeviceCode());
                 Toast.makeText(this, "Scanned1: " + bindingDto, Toast.LENGTH_LONG).show();
                 //-----------TODO验证dto是否符合格式---------
-                new ScanQrcodeTask(bindingDto).execute();
+                ScanQrcodeTask task = new ScanQrcodeTask(bindingDto);
+                task.execute();
             }
         } else {
             // This is important, otherwise the result will not be passed to the fragment
@@ -143,12 +145,12 @@ public class MainActivity extends AbstractBaseActivity {
 
         @Override
         protected RestResult doInBackground(Void... params) {
-            Log.i("scan ","access server");
+            LogUtil.i("access server");
 
             String json = JSON.toJSONString(scanQrcodeDto);
-            Log.i("ScanQrcodeTask",json);
+            LogUtil.i(json);
             String body = EncryptedHttpUtils.post(Constants.generateURL(Constants.PATH_QRCODE_SCAN),json);
-            Log.i("ScanQrcodeTask",body);
+            LogUtil.i(body);
             RestResult restResult = JSON.parseObject(body, RestResult.class);
             Log.i("ScanQrcodeTask",restResult.toString());
             //-----------------TODO 要考虑restResult的httpStatus------------------------------------------------
@@ -158,12 +160,12 @@ public class MainActivity extends AbstractBaseActivity {
 
         @Override
         protected void onPostExecute(RestResult restResult) {
-            Log.i("ScanQrcodeTask","=======================");
-            Log.i("ScanQrcodeTask",restResult.toString());
+            LogUtil.i("=======================");
+            LogUtil.i(restResult.toString());
 
             if(restResult.isHttpStatusOK()){
                 ScanQrcodeVO vo = JSON.parseObject(restResult.getData(),ScanQrcodeVO.class);
-                Log.i("ScanQrcodeTask",vo.toString());
+                LogUtil.i(vo.toString());
                 jumpToConfirmPage(vo,scanQrcodeDto);
             }else{
                 Toast.makeText(MainActivity.this,restResult.getMessage(),Toast.LENGTH_SHORT).show();
