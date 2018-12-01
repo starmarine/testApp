@@ -7,8 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -36,8 +35,7 @@ public class Step12Activity extends AbstractBaseActivity {
     public static String INTENT_KEY_BINDINGVO= "deviceBindingVO";
     public static BindingDto bindingDto;
 
-    private TextView textView1;
-    private Button scanButton;
+    private ImageButton scanImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +48,9 @@ public class Step12Activity extends AbstractBaseActivity {
         setContentView(R.layout.activity_step12);
 //        ActionBar actionBar = getActionBar();
 //        actionBar.hide();
-        textView1 = findViewById(R.id.bindingTextView);
-        scanButton = findViewById(R.id.scanButton);
-        scanButton.setOnClickListener(new View.OnClickListener() {
+
+        ImageButton scanImageButton = findViewById(R.id.scanImageButton);
+        scanImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("","begin scan ");
