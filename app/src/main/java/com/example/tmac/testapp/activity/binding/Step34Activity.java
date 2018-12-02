@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +44,12 @@ public class Step34Activity extends AbstractBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("Step34Activity","into Step34Activity");
         super.onCreate(savedInstanceState);
+
+        //--------------------即隐藏标题栏---------------------
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//remove title bar  即隐藏标题栏
+//        getSupportActionBar().hide();// 隐藏ActionBar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//remove notification bar
+
         setContentView(R.layout.activity_step34);
         textViewDisplayName = findViewById(R.id.textViewDisplayName);
         textViewUserName = findViewById(R.id.textViewUserName);

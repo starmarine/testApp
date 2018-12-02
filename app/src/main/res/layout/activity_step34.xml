@@ -7,6 +7,66 @@
     tools:context="com.example.tmac.testapp.MainActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="40px"
+            android:layout_marginBottom="40px"
+            android:layout_marginLeft="40px"
+            android:layout_marginRight="20px"
+            android:background="@drawable/edit_shape"
+            android:textSize="25sp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/sendSmsBtn"
+            android:background="@drawable/button_shape_selector"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40px"
+            android:layout_marginBottom="40px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="40px"
+            android:text="验证"
+            android:textSize="25sp"
+            android:textColor="#1E90FF"
+            />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/verifyCodeInput"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_shape"
+        android:layout_marginTop="40px"
+        android:layout_marginBottom="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:textSize="25sp"
+        />
+
+    <Button
+        android:id="@+id/bindBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_confirm_selector"
+        android:layout_marginTop="40px"
+        android:layout_marginBottom="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="40px"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:text="确定"/>
+
+    <!-- 下面是调试信息 -->
     <TextView
         android:id="@+id/textViewDisplayName"
         android:layout_width="wrap_content"
@@ -26,27 +86,12 @@
         android:layout_height="wrap_content"
         android:text="请扫描二维码进行ID管家绑定!" />
 
-    <EditText
-        android:id="@+id/phoneInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/verifyCodeInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/sendSmsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="发送验证码"/>
 
-    <Button
-        android:id="@+id/bindBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="绑定"/>
+
+
+
 
 </LinearLayout>
 
