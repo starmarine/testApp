@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.example.tmac.testapp.constants.Constants;
 import com.example.tmac.testapp.dto.dto.TotpKeyDto;
 import com.example.tmac.testapp.dto.vo.RestResult;
 import com.example.tmac.testapp.dto.vo.TotpKeyVO;
+import com.example.tmac.testapp.utils.DebugUtils;
 import com.example.tmac.testapp.utils.ProfileUtils;
 import com.example.tmac.testapp.utils.TOTPPasswordGenerator;
 import com.example.tmac.testapp.utils.http.EncryptedHttpUtils;
@@ -44,6 +46,8 @@ public class TabMfaFragment extends Fragment {
     private TextView totpCode3;
     private TextView totpCode4;
     private TextView totpCode5;
+
+    LinearLayout mfaDebugLayout;
 
     private TabMfaFragment.TotpRefreshTask task;
 
@@ -75,6 +79,7 @@ public class TabMfaFragment extends Fragment {
         totpCode4 = contentView.findViewById(R.id.totpCode4);
         totpCode5 = contentView.findViewById(R.id.totpCode5);
 
+        DebugUtils.setMfaLayoutVisibility(contentView);
         //---------在这里update一下的作用是为了避免后台线程只能在时间整除60的情况下计算code，不在60的情况下就不会显示code
         updateTotp();
         tvSuccess.setText("绑定成功:"+ ProfileUtils.getDeviceCode() + "公钥:"+ProfileUtils.getPublicKey()+"私钥:"+ProfileUtils.getPrivateKey());
@@ -206,7 +211,6 @@ public class TabMfaFragment extends Fragment {
                 handler.sendMessage(msg);
             }
         }
-
     }
 
     class UpdataUIHandler extends Handler{

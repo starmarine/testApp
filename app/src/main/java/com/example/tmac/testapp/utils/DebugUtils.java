@@ -1,5 +1,9 @@
 package com.example.tmac.testapp.utils;
 
+import android.view.View;
+import android.widget.LinearLayout;
+
+import com.example.tmac.testapp.R;
 import com.example.tmac.testapp.utils.codec.KeyUtils;
 
 public class DebugUtils {
@@ -16,6 +20,13 @@ public class DebugUtils {
             KeyUtils.Base64KeyPair pair = new KeyUtils.Base64KeyPair(Base64PublicKey,Base64PrivateKey);
             ProfileUtils.setKeyPair(pair);
             ProfileUtils.setHost(Host);
+        }
+    }
+
+    public static void setMfaLayoutVisibility(View contentView){
+        if(isDebug){
+            LinearLayout mfaDebugLayout = contentView.findViewById(R.id.mfaDebugLayout);
+            mfaDebugLayout.setVisibility(View.INVISIBLE);
         }
     }
 }
