@@ -106,15 +106,18 @@ public class TabMfaFragment extends Fragment {
             tvTotp.setText(totpCode);
             if(StringUtils.isNotBlank(totpCode) && totpCode.length() == 6){
                 Log.i("ttt" , totpCode);
-                totpCode0.setText(totpCode.substring(0,1));
-                totpCode1.setText(totpCode.substring(1,2));
-                totpCode2.setText(totpCode.substring(2,3));
-                totpCode3.setText(totpCode.substring(3,4));
-                totpCode4.setText(totpCode.substring(4,5));
-                totpCode5.setText(totpCode.substring(5,6));
+                updateTotpTextView(totpCode);
             }
-
         }
+    }
+
+    private void updateTotpTextView(String totpCode){
+        totpCode0.setText(totpCode.substring(0,1));
+        totpCode1.setText(totpCode.substring(1,2));
+        totpCode2.setText(totpCode.substring(2,3));
+        totpCode3.setText(totpCode.substring(3,4));
+        totpCode4.setText(totpCode.substring(4,5));
+        totpCode5.setText(totpCode.substring(5,6));
     }
 
     @Override
@@ -213,6 +216,7 @@ public class TabMfaFragment extends Fragment {
             String progress = msg.getData().getString(PROGRESS);
             if(StringUtils.isNotBlank(totpCode)){
                 tvTotp.setText(totpCode);
+                updateTotpTextView(totpCode);
             }
             tvTotpKey.setText(ProfileUtils.getTotp().getNewKey());
             tvProgress.setText(progress);
