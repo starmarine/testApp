@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +47,7 @@ public class TabMfaFragment extends Fragment {
     private TextView totpCode4;
     private TextView totpCode5;
 
-    LinearLayout mfaDebugLayout;
+    ImageButton imgButton;
 
     private TabMfaFragment.TotpRefreshTask task;
 
@@ -83,7 +83,16 @@ public class TabMfaFragment extends Fragment {
         //---------在这里update一下的作用是为了避免后台线程只能在时间整除60的情况下计算code，不在60的情况下就不会显示code
         updateTotp();
         tvSuccess.setText("绑定成功:"+ ProfileUtils.getDeviceCode() + "公钥:"+ProfileUtils.getPublicKey()+"私钥:"+ProfileUtils.getPrivateKey());
+        imgButton = contentView.findViewById(R.id.imageBtn);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("","begin scan ");
+                scanMarginScanner();
+            }
+        });
 
+        //----------------以下实际上是可以不要的-----------------
         btnScan = contentView.findViewById(R.id.btnScan);
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
