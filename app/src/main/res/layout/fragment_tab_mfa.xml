@@ -2,8 +2,150 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_shape">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/totpCode0"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp"
+                android:text="1"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                />
+
+
+
+            <TextView
+                android:id="@+id/totpCode1"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:text="2"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                />
+
+            <TextView
+                android:id="@+id/totpCode2"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:text="3"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                />
+
+            <TextView
+                android:id="@+id/totpCode3"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:text="4"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                />
+
+            <TextView
+                android:id="@+id/totpCode4"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:text="5"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                />
+
+            <TextView
+                android:id="@+id/totpCode5"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:text="6"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                android:layout_marginBottom="1dp"
+                />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="10dp"
+                android:text="动态验证码"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:background="#ffffff"
+                android:textColor="#1E90FF"
+                android:layout_marginBottom="1dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mfa_qrcode"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTotp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/tvProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GAGA" />
 
     <TextView
         android:id="@+id/tvSuccess"
@@ -17,17 +159,7 @@
         android:layout_height="wrap_content"
         android:text="" />
 
-    <TextView
-        android:id="@+id/tvTotp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
 
-    <TextView
-        android:id="@+id/tvProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="GAGA" />
 
     <Button
         android:id="@+id/btnScan"

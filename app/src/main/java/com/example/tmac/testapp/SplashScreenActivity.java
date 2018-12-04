@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.tmac.testapp.activity.binding.Step12Activity;
+import com.example.tmac.testapp.utils.DebugUtils;
 import com.example.tmac.testapp.utils.ProfileUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +18,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        DebugUtils.setProfile();
 
         String deviceCode = ProfileUtils.getDeviceCode();
         if(StringUtils.isNotBlank(deviceCode)){

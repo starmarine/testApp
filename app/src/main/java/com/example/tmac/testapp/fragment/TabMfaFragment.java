@@ -38,6 +38,13 @@ public class TabMfaFragment extends Fragment {
     private TextView tvTotpKey;
     private TextView tvTotp;
     private TextView tvProgress;
+    private TextView totpCode0;
+    private TextView totpCode1;
+    private TextView totpCode2;
+    private TextView totpCode3;
+    private TextView totpCode4;
+    private TextView totpCode5;
+
     private TabMfaFragment.TotpRefreshTask task;
 
     private Button btnScan;
@@ -60,6 +67,14 @@ public class TabMfaFragment extends Fragment {
         tvTotpKey = contentView.findViewById(R.id.tvTotpKey);
         tvTotp = contentView.findViewById(R.id.tvTotp);
         tvProgress = contentView.findViewById(R.id.tvProgress);
+
+        totpCode0 = contentView.findViewById(R.id.totpCode0);
+        totpCode1 = contentView.findViewById(R.id.totpCode1);
+        totpCode2 = contentView.findViewById(R.id.totpCode2);
+        totpCode3 = contentView.findViewById(R.id.totpCode3);
+        totpCode4 = contentView.findViewById(R.id.totpCode4);
+        totpCode5 = contentView.findViewById(R.id.totpCode5);
+
         //---------在这里update一下的作用是为了避免后台线程只能在时间整除60的情况下计算code，不在60的情况下就不会显示code
         updateTotp();
         tvSuccess.setText("绑定成功:"+ ProfileUtils.getDeviceCode() + "公钥:"+ProfileUtils.getPublicKey()+"私钥:"+ProfileUtils.getPrivateKey());
@@ -89,6 +104,16 @@ public class TabMfaFragment extends Fragment {
         if(vo!=null && vo.getNewKey() != null){
             String totpCode = TOTPPasswordGenerator.generateOTP(vo.getNewKey(),vo.getTime(),vo.getStep());
             tvTotp.setText(totpCode);
+            if(StringUtils.isNotBlank(totpCode) && totpCode.length() == 6){
+                Log.i("ttt" , totpCode);
+                totpCode0.setText(totpCode.substring(0,1));
+                totpCode1.setText(totpCode.substring(1,2));
+                totpCode2.setText(totpCode.substring(2,3));
+                totpCode3.setText(totpCode.substring(3,4));
+                totpCode4.setText(totpCode.substring(4,5));
+                totpCode5.setText(totpCode.substring(5,6));
+            }
+
         }
     }
 
